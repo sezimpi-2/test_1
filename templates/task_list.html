@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Task List</h1>
+<form method="get">
+    <div class="form-group">
+        <label for="category">Category:</label>
+        <select name="category" id="category" class="form-control">
+            <option value="">All</option>
+            {% for category in categories %}
+            <option value="{{ category.id }}">{{ category.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="search">Search:</label>
+        <input type="text" name="search" id="search" class="form-control" placeholder="Search tasks...">
+    </div>
+    <button type="submit" class="btn btn-primary">Filter</button>
+</form>
+<ul class="list-group mt-4">
+    {% for task in tasks %}
+    <li class="list-group-item">
+        <a href="{% url 'tasks:task_detail' task.pk %}">{{ task.title }}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
